@@ -4,9 +4,43 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Odin-Library</title>
+    <link rel="stylesheet" href="./index.css">
 </head>
 <body>
-    
+
+    <!-- navigation bar -->
+    <nav>
+        <div class="title">
+            <img src="./assets/library.png" alt="logo">
+            <h2>Odin-Library</h2>
+        </div>
+        <button><img src="./assets/add.png" alt="add"></button>
+    </nav>
+
+    <!-- for adding books -->
+    <form>
+        <div class="inputField">
+            <input type="text" name="title" id="title">
+            <label for="title">Title</label>
+        </div>
+        <div class="inputField">
+            <input type="text" name="author" id="author">
+            <label for="author">Author</label>
+        </div>
+        <div class="inputField">
+            <input type="number" name="totpag" id="totpag">
+            <label for="totpag">Total Pages</label>
+        </div>
+        <div class="inputField">
+            <input type="number" name="pagcom" id="pagcom">
+            <label for="pagcom">Pages Completed</label>
+        </div>
+        <input type="checkbox" name="iscom" id="iscom">
+        <label for="iscom">Comppleted?</label>
+        <div class="but">bharath</div>
+    </form>
+
+    <script src="./index.js" type="module"></script>
 </body>
 </html>
