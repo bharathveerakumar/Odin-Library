@@ -4,7 +4,7 @@ import { Books } from "./Model.js";
 export function createBook(forms){
     const book=new Books(forms['title'].value, 
     forms['author'].value, forms['totpag'].value,
-    forms['pagcom'].value, false)
+    forms['pagcom'].value, forms['iscom'].checked)
     return book;
 }
 
@@ -21,4 +21,8 @@ export function addNewBooks(newBook, book){
         return true;
     }
     return false;
+}
+
+export function setLocal(books){
+    localStorage.setItem('books', JSON.stringify(books));
 }

@@ -18,8 +18,36 @@
         <button><img src="./assets/add.png" alt="add"></button>
     </nav>
 
+    <!-- view book builder -->
+    <div class="view"></div>
+
     <!-- for adding books -->
-    <form>
+    <form class="addForm">
+        <div class="inputField">
+            <input type="text" name="title" id="title" autocomplete="off">
+            <label for="title">Title</label>
+        </div>
+        <div class="inputField">
+            <input type="text" name="author" id="author" autocomplete="off">
+            <label for="author">Author</label>
+        </div>
+        <div class="inputField">
+            <input type="number" name="totpag" id="totpag">
+            <label for="totpag">Total Pages</label>
+        </div>
+        <div class="inputField">
+            <input type="number" name="pagcom" id="pagcom">
+            <label for="pagcom">Pages Completed</label>
+        </div>
+        <div>
+            <input type="checkbox" name="iscom" id="iscom">
+            <label for="iscom">Completed?</label>
+        </div>
+        <div class="butadd formbut">Submit</div>
+    </form>
+
+    <!-- For updating books -->
+    <form class="updateForm">
         <div class="inputField">
             <input type="text" name="title" id="title">
             <label for="title">Title</label>
@@ -36,13 +64,16 @@
             <input type="number" name="pagcom" id="pagcom">
             <label for="pagcom">Pages Completed</label>
         </div>
-        <input type="checkbox" name="iscom" id="iscom">
-        <label for="iscom">Comppleted?</label>
-        <div class="but">bharath</div>
+        <div>
+            <input type="checkbox" name="iscom" id="iscom">
+            <label for="iscom">Completed?</label>
+        </div>
+        <div class="butupd formbut">Submit</div>
     </form>
 
     <!-- for error message -->
     <div class="errmsg"><h2>Success</h2></div>
+
     <script src="./index.js" type="module"></script>
 </body>
 </html>

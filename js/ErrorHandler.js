@@ -1,22 +1,22 @@
 const errMsg=document.querySelector('.errmsg')
 
 function errDisp(){
-    errMsg.classList.add('trans')
+    errMsg.classList.add('active')
     setTimeout(()=>{
-        errMsg.classList.remove('trans')
+        errMsg.classList.remove('active')
     }, 3000)
 }
 
-export function errors(staCode, all){
-    if(staCode===200) errDisp();
+export function error(staCode){
+    errDisp();
     switch(staCode){
         case 100:{
             errMsg.innerHTML='<h2>fill the form fully!!!</h2>'
-            if(!all) break;
+            break;
         }
         case 300:{
             errMsg.innerHTML='<h2>Title Already Exists!!!</h2>'
-            if(!all) break;
+            break;
         }
     }
 }

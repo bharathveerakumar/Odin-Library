@@ -1,3 +1,6 @@
+import { setLocal } from "./CRUD.js";
+
+
 export class Books{
 
     constructor(title, author, totPag, noPag, isCom){
@@ -5,17 +8,20 @@ export class Books{
         this.author=author,
         this.totPag=totPag,
         this.noPag=noPag,
-        this.isCom=isCom,
-        this.books=[]
+        this.isCom=isCom
     }
 
-    bookInit(Books){
-        this.books=Books;
+}
+
+export class BookStore{
+
+    constructor(books){
+        this.books=books;
     }
 
     addBooks(book){
         this.books.push(book);
-        localStorage.setItem('books', JSON.stringify(this.books));
+        setLocal(this.books)
     }
 
     readBooks(){
@@ -28,12 +34,36 @@ export class Books{
         })
     }
 
+    updateBooks(book){
+        const i=this.books.findIndex((e)=>{
+            return e.title===book.title;
+        })
+        this.books[i]=book;
+        setLocal(this.books)
+    }
+
+    updateCom(title){
+        const i=this.books.findIndex((e)=>{
+            return e.title===title
+        })
+        console.log(this.books)
+        this.books[i].isCom=!this.books[i].isCom;
+        setLocal(this.books)
+    }
+
 }
 
-export class BookStore{
-    constructor(books){
-        this.books=books;
+
+export class Collections{
+
+    constructor(){
+        this.cName={}
     }
+
+    addCName(name){
+        this.cName[name]=[];
+    }
+
 }
 
 
