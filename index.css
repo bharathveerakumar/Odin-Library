@@ -87,3 +87,27 @@ input:focus{
     color: white;
     top: -20px;
 }
+
+.errmsg{
+    position: absolute;
+    display: none;
+    top: 130px;
+    font-size: 25px;
+    background-color: white;
+    border: 5px solid red;
+    border-radius: 50px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    z-index: 10;
+    transition: .5s;
+}
+
+.errmsg h2{
+    margin: 15px;
+}
+
+.trans{
+    padding: 10px;
+    display: flex;
+}

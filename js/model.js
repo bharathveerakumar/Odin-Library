@@ -11,7 +11,6 @@ export class Books{
 
     bookInit(Books){
         this.books=Books;
-        console.log(this.books)
     }
 
     addBooks(book){
@@ -29,6 +28,12 @@ export class Books{
         })
     }
 
+}
+
+export class BookStore{
+    constructor(books){
+        this.books=books;
+    }
 }
 
 
