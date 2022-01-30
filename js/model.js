@@ -59,8 +59,13 @@ export class Collections{
         this.cName=collection
     }
 
-    addCName(name, obj){
+    init(name){
+        console.log(this.cName[name].length)
         this.cName[name]=[];
+    }
+
+    addCName(name, obj){
+        if(!this.cName[name].length) this.init(name);
         this.cName[name].push(obj);
     }
 

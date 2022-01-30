@@ -101,7 +101,7 @@ document.querySelectorAll('.bookcardHov img').forEach((e)=>{
 })
 
 collBut.addEventListener('click', ()=>{
-    collection.addCName(collInp.value);
+    collection.addCName(collInp.value, obj);
     console.log(collection)
 })
 
