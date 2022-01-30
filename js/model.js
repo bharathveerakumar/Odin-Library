@@ -46,7 +46,6 @@ export class BookStore{
         const i=this.books.findIndex((e)=>{
             return e.title===title
         })
-        console.log(this.books)
         this.books[i].isCom=!this.books[i].isCom;
         setLocal(this.books)
     }
@@ -56,15 +55,17 @@ export class BookStore{
 
 export class Collections{
 
-    constructor(){
-        this.cName={}
+    constructor(collection){
+        this.cName=collection
     }
 
-    addCName(name){
+    addCName(name, obj){
         this.cName[name]=[];
+        this.cName[name].push(obj);
     }
 
 }
+
 
 
 

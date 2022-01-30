@@ -26,3 +26,7 @@ export function addNewBooks(newBook, book){
 export function setLocal(books){
     localStorage.setItem('books', JSON.stringify(books));
 }
+
+export function newBookUsingTit(title, book){
+    return book.searchBooks(title)
+}

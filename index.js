@@ -1,18 +1,23 @@
 import { Books, BookStore, Collections } from "./js/Model.js";
-import { formCheck, addNewBooks, createBook } from "./js/CRUD.js";
+import { formCheck, addNewBooks, createBook, newBookUsingTit } from "./js/CRUD.js";
 import { error } from "./js/ErrorHandler.js";
 
 
 // Iniatilzing books to array in constructors...
-const localBooks=JSON.parse(localStorage.getItem('books'))??[];
-const book=new BookStore(localBooks);
+const localBooks=JSON.parse(localStorage.getItem('books'))??[],
+localColl=JSON.parse(localStorage.getItem('collection'))??{},
+book=new BookStore(localBooks),
+collection=new Collections(localColl)
 
 
 const addForm=document.querySelector('.addForm'),
 updateForm=document.querySelector('.updateForm'),
 view=document.querySelector('.view'),
 addBut=document.querySelector('nav button'),
-inputs=document.querySelectorAll('input')
+inputs=document.querySelectorAll('input'),
+collectionList=document.querySelector('.coll'),
+collBut=document.querySelector('.coll button'),
+collInp=document.querySelector('.coll input')
 
 
 //building books
@@ -29,6 +34,13 @@ function viewBookBuilder(){
             <h3>Pages Completed${ e.noPag }</h3>
             <div><label for="iscom">Completed? </label>
             <input type="checkbox" id="iscom" ${e.isCom?"checked":""} data-tit="${e.title}"></div>`
+        
+        bookCard.innerHTML+=`
+            <div class="bookcardHov">
+                <img src="./assets/bin.png" data-tit="${e.title}">
+                <img src="./assets/update.png" data-tit="${e.title}">
+                <img src="./assets/add-folder.png" data-tit="${e.title}">
+            </div>`
                 
         view.appendChild(bookCard)
     })
@@ -39,6 +51,8 @@ function viewBookBuilder(){
         })
     })
 }
+
+viewBookBuilder()
 
 
 //editing the z-index value..
@@ -63,8 +77,8 @@ addForm.querySelector('.butadd').addEventListener('click', ()=>{
         const newBook=createBook(addForm);
         addNewBooks(newBook, book)?error(200):error(300);
         addForm.classList.toggle('active')
+        viewBookBuilder();
     }
-    viewBookBuilder();
 })
 
 
@@ -76,6 +90,20 @@ updateForm.querySelector('.butupd').addEventListener('click', ()=>{
     }
 })
 
+let obj;
 
-viewBookBuilder()
+//collection form
+document.querySelectorAll('.bookcardHov img').forEach((e)=>{
+    e.addEventListener('click', ()=>{
+        collectionList.classList.toggle('activ')
+        obj=newBookUsingTit(e.dataset.tit, book)
+    })
+})
+
+collBut.addEventListener('click', ()=>{
+    collection.addCName(collInp.value);
+    console.log(collection)
+})
+
+
 
