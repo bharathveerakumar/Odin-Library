@@ -68,7 +68,25 @@ export class Collections{
             this.init(name);
         }
         this.cName[name].push(obj);
-        collectionNameRend(this.cName);
+        collectionNameRend(this, obj);
+        setLocal('collections', this.cName);
+    }
+
+    deleteOrAdd(key, obj){
+        let objExists=this.cName[key].find((e)=>{
+            return e.title===obj.title;
+        })
+
+        if(!objExists){
+            this.cName[key].push(obj)
+        }
+        else{
+            let replace=this.cName[key].filter((e)=>{
+                return e.title!==obj.title;
+            })
+            this.cName[key]=replace;
+        }
+        
         setLocal('collections', this.cName);
     }
 

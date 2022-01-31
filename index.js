@@ -97,13 +97,22 @@ document.querySelectorAll('.bookcardHov img').forEach((e)=>{
     e.addEventListener('click', ()=>{
         collectionList.classList.toggle('activ')
         obj=newBookUsingTit(e.dataset.tit, book)
-        collectionNameRend(collection)
+        collectionNameRend(collection, obj);
+
+        document.querySelectorAll('.collChild input').forEach((e)=>{
+            console.log(e)
+            e.addEventListener('change', ()=>{
+                collection.deleteOrAdd(e.dataset.key, obj);
+            })
+        })
     })
 })
 
 collBut.addEventListener('click', ()=>{
     collection.addCName(collInp.value, obj);
 })
+
+
 
 
 

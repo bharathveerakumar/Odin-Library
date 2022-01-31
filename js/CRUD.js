@@ -1,6 +1,7 @@
 import { Books } from "./Model.js";
 
-const collectionList=document.querySelector('.coll')
+const collectionList=document.querySelector('.coll'),
+collectionChild=document.querySelector('.collChild')
 
 export function createBook(forms){
     const book=new Books(forms['title'].value, 
@@ -32,8 +33,21 @@ export function newBookUsingTit(title, book){
     return book.searchBooks(title)
 }
 
-export function collectionNameRend(books){
-    for(var key in books.cName){
-        console.log(key)
+function objExists(collection, obj){
+    return collection.find((data)=>{
+        return data.title==obj.title;
+    })
+}
+
+export function collectionNameRend(collections, obj){
+    collectionChild.innerHTML='';
+    for(var key in collections.cName){
+        collectionChild.innerHTML+=`
+                                <div>
+                                    <input type="checkbox" data-key="${key}"  
+                                    ${!objExists(collections.cName[key], obj)?"":"checked"}>
+                                    <label>${key}</label>
+                                </div>`
     }
+    collectionList.appendChild(collectionChild);
 }
