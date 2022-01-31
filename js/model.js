@@ -1,4 +1,4 @@
-import { setLocal } from "./CRUD.js";
+import { setLocal, collectionNameRend } from "./CRUD.js";
 
 
 export class Books{
@@ -21,7 +21,7 @@ export class BookStore{
 
     addBooks(book){
         this.books.push(book);
-        setLocal(this.books)
+        setLocal('books', this.books)
     }
 
     readBooks(){
@@ -39,7 +39,7 @@ export class BookStore{
             return e.title===book.title;
         })
         this.books[i]=book;
-        setLocal(this.books)
+        setLocal('books', this.books)
     }
 
     updateCom(title){
@@ -47,7 +47,7 @@ export class BookStore{
             return e.title===title
         })
         this.books[i].isCom=!this.books[i].isCom;
-        setLocal(this.books)
+        setLocal('books', this.books)
     }
 
 }
@@ -60,13 +60,16 @@ export class Collections{
     }
 
     init(name){
-        console.log(this.cName[name].length)
         this.cName[name]=[];
     }
 
     addCName(name, obj){
-        if(!this.cName[name].length) this.init(name);
+        if(!this.cName.hasOwnProperty(name)){
+            this.init(name);
+        }
         this.cName[name].push(obj);
+        collectionNameRend(this.cName);
+        setLocal('collections', this.cName);
     }
 
 }

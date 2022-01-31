@@ -1,11 +1,11 @@
 import { Books, BookStore, Collections } from "./js/Model.js";
-import { formCheck, addNewBooks, createBook, newBookUsingTit } from "./js/CRUD.js";
+import { formCheck, addNewBooks, createBook, newBookUsingTit, collectionNameRend } from "./js/CRUD.js";
 import { error } from "./js/ErrorHandler.js";
 
 
 // Iniatilzing books to array in constructors...
 const localBooks=JSON.parse(localStorage.getItem('books'))??[],
-localColl=JSON.parse(localStorage.getItem('collection'))??{},
+localColl=JSON.parse(localStorage.getItem('collections'))??{},
 book=new BookStore(localBooks),
 collection=new Collections(localColl)
 
@@ -97,12 +97,12 @@ document.querySelectorAll('.bookcardHov img').forEach((e)=>{
     e.addEventListener('click', ()=>{
         collectionList.classList.toggle('activ')
         obj=newBookUsingTit(e.dataset.tit, book)
+        collectionNameRend(collection)
     })
 })
 
 collBut.addEventListener('click', ()=>{
     collection.addCName(collInp.value, obj);
-    console.log(collection)
 })
 
 

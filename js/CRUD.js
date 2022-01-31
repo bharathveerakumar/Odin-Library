@@ -1,5 +1,6 @@
 import { Books } from "./Model.js";
 
+const collectionList=document.querySelector('.coll')
 
 export function createBook(forms){
     const book=new Books(forms['title'].value, 
@@ -23,10 +24,16 @@ export function addNewBooks(newBook, book){
     return false;
 }
 
-export function setLocal(books){
-    localStorage.setItem('books', JSON.stringify(books));
+export function setLocal(item, books){
+    localStorage.setItem(`${item}`, JSON.stringify(books));
 }
 
 export function newBookUsingTit(title, book){
     return book.searchBooks(title)
+}
+
+export function collectionNameRend(books){
+    for(var key in books.cName){
+        console.log(key)
+    }
 }
