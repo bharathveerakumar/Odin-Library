@@ -56,6 +56,7 @@ function viewBookBuilder(){
         })
     })
     deleteBookAdder()
+    addCollection()
 }
 
 viewBookBuilder()
@@ -94,6 +95,7 @@ function deleteBookAdder(){
         e.addEventListener('click', ()=>{
             book.deleteBook(e.dataset.tit)
             viewBookBuilder();
+            collection.deleteEntirely(e.dataset.tit)
         })
     })
 }
@@ -108,19 +110,23 @@ updateForm.querySelector('.butupd').addEventListener('click', ()=>{
 })
 
 
-//toggle the collection form...
-const addBookToColl=document.querySelectorAll('.addColl')
-addBookToColl.addEventListener('click', ()=>{
-    collectionList.classList.toggle('activ')
-    obj=book.searchBooks(e.dataset.tit);
-    collectionNameRend(collection, obj);
-
-    document.querySelectorAll('.collChild input').forEach((e)=>{
-        e.addEventListener('change', ()=>{
-            collection.deleteOrAdd(e.dataset.key, obj);
+function addCollection(){
+    //toggle the collection form...
+    const addBookToColl=document.querySelectorAll('.addColl')
+    addBookToColl.forEach((e)=>{
+        e.addEventListener('click', ()=>{
+            collectionList.classList.toggle('activ')
+            obj=book.searchBooks(e.dataset.tit);
+            collectionNameRend(collection, obj);
+        
+            document.querySelectorAll('.collChild input').forEach((e)=>{
+                e.addEventListener('change', ()=>{
+                    collection.deleteOrAdd(e.dataset.key, obj);
+                })
+            })
         })
     })
-})
+}
 
 
 //to add the new field in collections...

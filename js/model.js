@@ -107,7 +107,6 @@ export class Collections{
         }
         setLocal('collections', this.cName)
     }
-
 }
 
 
