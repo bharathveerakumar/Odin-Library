@@ -50,6 +50,14 @@ export class BookStore{
         setLocal('books', this.books)
     }
 
+    deleteBook(title){
+        const replace=this.books.filter((e)=>{
+            return e.title!==title
+        })
+        this.books=replace;
+        setLocal('books', this.books)
+    }
+
 }
 
 
@@ -88,6 +96,16 @@ export class Collections{
         }
         
         setLocal('collections', this.cName);
+    }
+
+    deleteEntirely(title){
+        for(var key in this.cName){
+            let replace=this.cName[key].filter((e)=>{
+                return e.title!==title;
+            })
+            this.cName[key]=replace;
+        }
+        setLocal('collections', this.cName)
     }
 
 }

@@ -1,5 +1,5 @@
 import { Books, BookStore, Collections } from "./js/Model.js";
-import { formCheck, addNewBooks, createBook, newBookUsingTit, collectionNameRend } from "./js/CRUD.js";
+import { formCheck, addNewBooks, createBook, collectionNameRend } from "./js/CRUD.js";
 import { error } from "./js/ErrorHandler.js";
 
 
@@ -17,7 +17,12 @@ addBut=document.querySelector('nav button'),
 inputs=document.querySelectorAll('input'),
 collectionList=document.querySelector('.coll'),
 collBut=document.querySelector('.coll button'),
-collInp=document.querySelector('.coll input')
+collInp=document.querySelector('.coll input'),
+collCan=document.querySelector('.coll img')
+
+
+//for retriving objects from title which in img tag...
+let obj;
 
 
 //building books
@@ -37,9 +42,9 @@ function viewBookBuilder(){
         
         bookCard.innerHTML+=`
             <div class="bookcardHov">
-                <img src="./assets/bin.png" data-tit="${e.title}">
-                <img src="./assets/update.png" data-tit="${e.title}">
-                <img src="./assets/add-folder.png" data-tit="${e.title}">
+                <img src="./assets/bin.png" data-tit="${e.title}" class="delete">
+                <img src="./assets/update.png" data-tit="${e.title}" class="update">
+                <img src="./assets/add-folder.png" data-tit="${e.title}" class="addColl">
             </div>`
                 
         view.appendChild(bookCard)
@@ -50,6 +55,7 @@ function viewBookBuilder(){
             book.updateCom(e.dataset.tit)
         })
     })
+    deleteBookAdder()
 }
 
 viewBookBuilder()
@@ -82,6 +88,17 @@ addForm.querySelector('.butadd').addEventListener('click', ()=>{
 })
 
 
+//for delete the book from the bookstore and collections...
+function deleteBookAdder(){
+    document.querySelectorAll('.delete').forEach((e)=>{
+        e.addEventListener('click', ()=>{
+            book.deleteBook(e.dataset.tit)
+            viewBookBuilder();
+        })
+    })
+}
+
+
 //checking and updating the books to the storage...
 updateForm.querySelector('.butupd').addEventListener('click', ()=>{
     if(!formCheck(updateForm)) error(100);
@@ -90,26 +107,31 @@ updateForm.querySelector('.butupd').addEventListener('click', ()=>{
     }
 })
 
-let obj;
 
-//collection form
-document.querySelectorAll('.bookcardHov img').forEach((e)=>{
-    e.addEventListener('click', ()=>{
-        collectionList.classList.toggle('activ')
-        obj=newBookUsingTit(e.dataset.tit, book)
-        collectionNameRend(collection, obj);
+//toggle the collection form...
+const addBookToColl=document.querySelectorAll('.addColl')
+addBookToColl.addEventListener('click', ()=>{
+    collectionList.classList.toggle('activ')
+    obj=book.searchBooks(e.dataset.tit);
+    collectionNameRend(collection, obj);
 
-        document.querySelectorAll('.collChild input').forEach((e)=>{
-            console.log(e)
-            e.addEventListener('change', ()=>{
-                collection.deleteOrAdd(e.dataset.key, obj);
-            })
+    document.querySelectorAll('.collChild input').forEach((e)=>{
+        e.addEventListener('change', ()=>{
+            collection.deleteOrAdd(e.dataset.key, obj);
         })
     })
 })
 
+
+//to add the new field in collections...
 collBut.addEventListener('click', ()=>{
     collection.addCName(collInp.value, obj);
+})
+
+
+//close the collection form...
+collCan.addEventListener('click', ()=>{
+    collectionList.classList.toggle('activ')
 })
 
 

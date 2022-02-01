@@ -29,10 +29,6 @@ export function setLocal(item, books){
     localStorage.setItem(`${item}`, JSON.stringify(books));
 }
 
-export function newBookUsingTit(title, book){
-    return book.searchBooks(title)
-}
-
 function objExists(collection, obj){
     return collection.find((data)=>{
         return data.title==obj.title;
@@ -49,5 +45,4 @@ export function collectionNameRend(collections, obj){
                                     <label>${key}</label>
                                 </div>`
     }
-    collectionList.appendChild(collectionChild);
 }
