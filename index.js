@@ -18,7 +18,8 @@ inputs=document.querySelectorAll('input'),
 collectionList=document.querySelector('.coll'),
 collBut=document.querySelector('.coll button'),
 collInp=document.querySelector('.coll input'),
-collCan=document.querySelector('.coll img')
+collCan=document.querySelector('.coll img'),
+uptBut=document.querySelector('.butupd')
 
 
 //for retriving objects from title which in img tag...
@@ -57,6 +58,7 @@ function viewBookBuilder(){
     })
     deleteBookAdder()
     addCollection()
+    updateBook()
 }
 
 viewBookBuilder()
@@ -89,30 +91,33 @@ addForm.querySelector('.butadd').addEventListener('click', ()=>{
 })
 
 
-//for delete the book from the bookstore and collections...
-function deleteBookAdder(){
-    document.querySelectorAll('.delete').forEach((e)=>{
+//toggle update form
+function updateBook(){
+    document.querySelectorAll('.update').forEach((e)=>{
         e.addEventListener('click', ()=>{
-            book.deleteBook(e.dataset.tit)
-            viewBookBuilder();
-            collection.deleteEntirely(e.dataset.tit)
+            updateForm.classList.toggle('active')
+            obj=book.searchBooks(e.dataset.tit);
         })
     })
 }
 
 
-//checking and updating the books to the storage...
-updateForm.querySelector('.butupd').addEventListener('click', ()=>{
-    if(!formCheck(updateForm)) error(100);
-    else{
-        const newBook=createBook(updateForm);
-    }
-})
+//for delete the book from the bookstore and collections...
+function deleteBookAdder(){
+    document.querySelectorAll('.delete').forEach((e)=>{
+        e.addEventListener('click', ()=>{
+            book.deleteBook(e.dataset.tit)
+            collection.deleteEntirely(e.dataset.tit)
+            viewBookBuilder();
+        })
+    })
+}
 
 
+//toggle the collection form...
 function addCollection(){
-    //toggle the collection form...
     const addBookToColl=document.querySelectorAll('.addColl')
+
     addBookToColl.forEach((e)=>{
         e.addEventListener('click', ()=>{
             collectionList.classList.toggle('activ')
@@ -131,6 +136,7 @@ function addCollection(){
 
 //to add the new field in collections...
 collBut.addEventListener('click', ()=>{
+    if(!collInp.value) return error(100);
     collection.addCName(collInp.value, obj);
 })
 
@@ -141,6 +147,21 @@ collCan.addEventListener('click', ()=>{
 })
 
 
+//close the update form
+document.querySelector('.updateForm img').addEventListener('click', ()=>{
+    updateForm.classList.toggle('active')
+})
 
 
+document.querySelector('.butupd').addEventListener('click', ()=>{
 
+    if(!formCheck(updateForm)) return error(100);
+    const newBook=createBook(updateForm);
+    if(!book.searchBooks(newBook.title)){
+        book.findAndReplace(obj.title, newBook),
+        collection.updateEntirely(obj.title, newBook),
+        updateForm.classList.remove('active')
+    }
+    else error(300)
+
+})

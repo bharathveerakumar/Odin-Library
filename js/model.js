@@ -58,6 +58,14 @@ export class BookStore{
         setLocal('books', this.books)
     }
 
+    findAndReplace(title, obj){
+        const i=this.books.findIndex((e)=>{
+            return e.title===title;
+        })
+        this.books[i]=obj;
+        setLocal('books', this.books)
+    }
+
 }
 
 
@@ -104,6 +112,16 @@ export class Collections{
                 return e.title!==title;
             })
             this.cName[key]=replace;
+        }
+        setLocal('collections', this.cName)
+    }
+
+    updateEntirely(title, obj){
+        for(var key in this.cName){
+            let i=this.cName[key].findIndex((e)=>{
+                return e.title===title;
+            })
+            i>=0?this.cName[key][i]=obj:1;
         }
         setLocal('collections', this.cName)
     }

@@ -122,6 +122,12 @@ input:focus{
     border-radius: 15px;
 }
 
+.updateForm img{
+    width: 50px;
+    align-self: flex-end;
+    margin-right: 15px;
+}
+
 .view{
     width: 100%;
     display: flex;
